@@ -7,21 +7,21 @@ import org.springframework.stereotype.Component;
 @Component
 @Slf4j
 public class Flow {
-    ExternalInfoProcess externalInfoProcess;
-    ExternalServiceImpl externalServiceImpl;
+    Process process;
+    ExternalService externalService;
 
-    public Flow(@Lazy ExternalInfoProcess externalInfoProcess, ExternalServiceImpl externalServiceImpl) {
-        this.externalInfoProcess = externalInfoProcess;
-        this.externalServiceImpl = externalServiceImpl;
+    public Flow(@Lazy Process process, ExternalService externalService) {
+        this.process = process;
+        this.externalService = externalService;
     }
 
     void run (Integer id){
-        ExternalInfo externalInfo = externalServiceImpl.getExternalInfo(id);
+        ExternalInfo externalInfo = externalService.getExternalInfo(id);
         if(externalInfo.getInfo() != null){
-            externalInfoProcess.run(externalInfo);
+            this.process.run(externalInfo);
         }
         else{
-            log.info("ExternalInfoProcess.getClass = {}", externalInfoProcess.getClass());
+            log.info("ExternalInfoProcess.getClass = {}", this.process.getClass());
         }
     }
 }
