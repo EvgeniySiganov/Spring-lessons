@@ -1,4 +1,4 @@
-package ru.iteco.lessontwo;
+package ru.iteco.lessons.homeworkone;
 
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
@@ -19,5 +19,9 @@ public class ExternalInfo {
 
     public void setInfo(String info) {
         this.info = info;
+    }
+
+    public Integer getId() {
+        return id;
     }
 }

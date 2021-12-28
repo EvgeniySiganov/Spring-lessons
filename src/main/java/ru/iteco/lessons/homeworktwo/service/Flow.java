@@ -1,8 +1,9 @@
-package ru.iteco.lessontwo;
+package ru.iteco.lessons.homeworktwo.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
+import ru.iteco.lessons.homeworkone.ExternalInfo;
 
 @Component
 @Slf4j
@@ -15,7 +16,7 @@ public class Flow {
         this.externalService = externalService;
     }
 
-    void run (Integer id){
+    public void run (Integer id){
         ExternalInfo externalInfo = externalService.getExternalInfo(id);
         if(externalInfo.getInfo() != null){
             this.process.run(externalInfo);
