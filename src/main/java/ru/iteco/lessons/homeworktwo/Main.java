@@ -16,9 +16,6 @@ public class Main {
     public static void main(String[] args) {
         ConfigurableApplicationContext applicationContext = new AnnotationConfigApplicationContext(Main.class);
 
-        ExternalService externalService = applicationContext.getBean(ExternalService.class);
-        externalService.getExternalInfo(3);
-
         Flow flow = applicationContext.getBean(Flow.class);
         flow.run(1);
         flow.run(2);

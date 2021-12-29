@@ -17,7 +17,7 @@ public class ExternalInfoProcess implements Process {
 
     @Override
     @CheckRequest
-    public boolean run(ExternalInfo externalInfo) {
+    public Boolean run(ExternalInfo externalInfo) {
         if(externalInfo.getId() == id){
             log.info("ExternalInfoProcess.run return: false");
             throw new RuntimeException("ID-NOT-PROCESS");
