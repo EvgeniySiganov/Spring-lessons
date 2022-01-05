@@ -1,4 +1,4 @@
-package ru.iteco.lessons;
+package ru.iteco.account.service;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
