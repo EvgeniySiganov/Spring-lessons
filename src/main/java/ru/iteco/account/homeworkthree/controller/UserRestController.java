@@ -20,14 +20,14 @@ public class UserRestController {
         this.userService = userService;
     }
 
-    @GetMapping("/by-user-id/{userId}")
-    public ResponseEntity<List<BankBookDto>> getAllBBDto(@PathVariable(required = false) Integer userId){
+    @GetMapping({"/by-user-id/{userId}", "/by-user-id/"})
+    public ResponseEntity<List<BankBookDto>> getAllBBDto(@PathVariable Integer userId){
         return ResponseEntity
                 .ok(userService.findAllBankBookDtoByUserId(userId));
     }
 
-    @GetMapping("/{bankBookId}")
-    public ResponseEntity<BankBookDto> getBBDto(@PathVariable(required = false) Integer bankBookId){
+    @GetMapping({"/{bankBookId}", "/"})
+    public ResponseEntity<BankBookDto> getBBDto(@PathVariable Integer bankBookId){
         return ResponseEntity
                 .ok(userService.findBankBookDto(bankBookId));
     }
