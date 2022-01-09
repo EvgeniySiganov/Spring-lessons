@@ -1,6 +1,6 @@
 package ru.iteco.account.service;
 
-import ru.iteco.account.model.UserDto;
+import ru.iteco.account.model.dto.UserDto;
 
 import java.util.List;
 
@@ -10,5 +10,5 @@ public interface UserService {
     UserDto findById(Integer id);
     UserDto create(UserDto userDto);
     UserDto update(UserDto userDto);
-    UserDto delete(Integer id);
+    void delete(Integer id);
 }
