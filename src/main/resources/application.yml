@@ -1,0 +1,10 @@
+spring:
+  thymeleaf:
+    prefix: classpath:/views/
+  datasource:
+    url: jdbc:postgresql://localhost:5432/account
+    username: account
+    password: account
+  jpa:
+    show-sql: true
+
