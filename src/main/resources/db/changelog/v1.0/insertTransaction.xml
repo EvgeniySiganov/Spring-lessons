@@ -1,0 +1,66 @@
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="create-bank-status-id-seq" author="iteco">
+        <createSequence sequenceName="status_id_seq" schemaName="bank"/>
+    </changeSet>
+
+    <changeSet id="create-bank-status-table" author="iteco">
+        <createTable tableName="status" schemaName="bank">
+            <column name="id" type="integer">
+                <constraints primaryKey="true" nullable="false" unique="true"/>
+            </column>
+            <column name="name" type="varchar">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+        <addDefaultValue schemaName="bank" tableName="status" columnName="id" defaultValueSequenceNext="status_id_seq"/>
+    </changeSet>
+
+    <changeSet id="create-bank-transaction-id-seq" author="iteco">
+        <createSequence sequenceName="transaction_id_seq" schemaName="bank"/>
+    </changeSet>
+
+    <changeSet id="create-bank-transaction-table" author="iteco">
+        <createTable tableName="transaction" schemaName="bank">
+            <column name="id" type="integer">
+                <constraints primaryKey="true" nullable="false" unique="true"/>
+            </column>
+            <column name="sourceBankBookId" type="integer">
+                <constraints foreignKeyName="bank_bank_book_source_fkey" references="bank.bank_book(id)"/>
+            </column>
+            <column name="targetBankBookId" type="integer">
+                <constraints foreignKeyName="bank_bank_book_target_fkey" references="bank.bank_book(id)"/>
+            </column>
+            <column name="amount" type="numeric">
+                <constraints nullable="false"/>
+            </column>
+            <column name="initiationDate" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="completionDate" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="integer">
+                <constraints foreignKeyName="bank_status_fkey" references="bank.status(id)"/>
+            </column>
+        </createTable>
+        <addDefaultValue schemaName="bank" tableName="transaction" columnName="id" defaultValueSequenceNext="transaction_id_seq"/>
+    </changeSet>
+
+    <changeSet id="insert-bank-status" author="iteco">
+        <insert tableName="status" schemaName="bank">
+            <column name="name">processing</column>
+        </insert>
+        <insert tableName="status" schemaName="bank">
+            <column name="name">successful</column>
+        </insert>
+        <insert tableName="status" schemaName="bank">
+            <column name="name">denied</column>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>
+

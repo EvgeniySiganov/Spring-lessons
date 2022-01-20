@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 import java.util.Objects;
 
 @Entity
-@Table(name = "bank_book", schema = "dict")
+@Table(name = "bank_book", schema = "bank")
 @Getter
 @Setter
 @ToString
@@ -36,10 +36,9 @@ public class BankBookEntity {
     @JoinColumn(name = "currency", referencedColumnName = "id")
     private CurrencyEntity currency;
 
-//    @ManyToOne
-//    @JoinColumn(name = "user_id", referencedColumnName = "id")
-//    @JoinTable
-//    private UserEntity userEntity;
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id", insertable = false, updatable = false)
+    private UserEntity userEntity;
 
     @Override
     public boolean equals(Object o) {

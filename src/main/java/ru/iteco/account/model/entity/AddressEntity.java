@@ -14,7 +14,6 @@ import java.util.Objects;
 @Table(name = "address", schema = "ad")
 @Getter
 @Setter
-@ToString
 @RequiredArgsConstructor
 public class AddressEntity {
 
@@ -37,6 +36,10 @@ public class AddressEntity {
     @Column(name = "home")
     private String home;
 
+    @OneToOne(mappedBy = "address",
+        cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH})
+    private UserEntity user;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -48,5 +51,16 @@ public class AddressEntity {
     @Override
     public int hashCode() {
         return getClass().hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return "AddressEntity{" +
+                "id=" + id +
+                ", country='" + country + '\'' +
+                ", city='" + city + '\'' +
+                ", street='" + street + '\'' +
+                ", home='" + home + '\'' +
+                '}';
     }
 }

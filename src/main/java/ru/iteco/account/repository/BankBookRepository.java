@@ -15,4 +15,6 @@ public interface BankBookRepository extends JpaRepository<BankBookEntity, Intege
 
     void deleteAllByUserId(Integer userId);
 
+    Optional<BankBookEntity> findByNumber(String number);
+
 }

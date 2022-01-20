@@ -2,15 +2,36 @@
 
 docker run --name account-postgres -p 5432:5432 -e POSTGRES_USER=account -e POSTGRES_PASSWORD=account -e POSTGRES_DB=account -d postgres:14
 
-Homework one:
-Добавить валидации:
+Homework:Добавить сущности в схеме bank:
 
-Для всех id - @NotNull при обновлении сущности, @Null при создании.
+Transaction{
 
-BankBookDto.number - не пустой
+Integer id;
 
-BankBookDto.amount - больше или равен 0
+Integer sourceBankBookId;
 
-Создать сущность в БД currency в новой схеме dict с полями id (сиквенс из БД) и name (имя валюты, USD и т.д.). Реализовать репозиторий и заменить в CurrencyValidator Set на наш репозиторий и выполнять проверку на наличие значения в БД.
+Integer targerBankBookId;
 
-Добавить сущность в БД bank_book для BankBookEntity (все поля должны быть обязательные выполнить валидацию), добавить репозиторий в BankBookService (добавить маппинг для Entity и Dto) и переписать все операции на использование репозитория.
+BigDecimal amount;
+
+LocalDateTime initiationDate;
+
+LocalDateTime completionDate;
+
+Integer status;
+
+}
+
+Status{
+
+Integer Id;
+
+String name;
+
+}
+
+Status = {"processing", "successful", "declined"}
+
+Создать с помощью Liquibase в v1.0. Добавить все необходимые связи.
+
+Так же реализовать сервис, который будет выполнять переводы между двумя bank_book (добавить проверку одинаковых валют и баланса) или двумя user (тут необходимо добавить проверку на наличие у пользователя счета с данной валютой и баланс).
