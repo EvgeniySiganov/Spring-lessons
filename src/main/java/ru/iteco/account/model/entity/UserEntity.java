@@ -8,14 +8,15 @@ import ru.iteco.account.validation.UpdateEntity;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "users", schema = "ad")
 @Getter
 @Setter
-@ToString
 @RequiredArgsConstructor
 public class UserEntity {
 
@@ -36,9 +37,17 @@ public class UserEntity {
     @OneToOne(cascade = CascadeType.ALL)
     private AddressEntity address;
 
-//    @OneToMany
-//    @JoinColumn(name = "user_id")
-//    private List<BankBookEntity> bankBookEntities;
+    @OneToMany
+    @JoinColumn(name = "user_id")
+    private List<BankBookEntity> bankBookEntities;
+
+    @ManyToMany
+    @JoinTable(
+            name = "users_groups", schema = "ad",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "group_id", referencedColumnName = "id")
+    )
+    private Set<GroupEntity> groupEntities = new HashSet<>();
 
     @Override
     public boolean equals(Object o) {
@@ -51,5 +60,14 @@ public class UserEntity {
     @Override
     public int hashCode() {
         return getClass().hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return "UserEntity{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                '}';
     }
 }
