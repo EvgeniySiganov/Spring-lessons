@@ -5,15 +5,10 @@ import org.springframework.stereotype.Component;
 import ru.iteco.account.model.dto.BankBookDto;
 import ru.iteco.account.model.dto.TransactionDto;
 import ru.iteco.account.model.dto.UserDto;
-import ru.iteco.account.model.entity.BankBookEntity;
-import ru.iteco.account.model.entity.StatusEntity;
-import ru.iteco.account.model.entity.TransactionEntity;
-import ru.iteco.account.model.entity.UserEntity;
-import ru.iteco.account.repository.BankBookRepository;
-import ru.iteco.account.repository.CurrencyRepository;
-import ru.iteco.account.repository.StatusRepository;
-import ru.iteco.account.repository.TransactionRepository;
+import ru.iteco.account.model.entity.*;
+import ru.iteco.account.repository.*;
 
+import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -24,8 +19,11 @@ public class TransactionService {
     private final BankBookRepository bankBookRepository;
     private final TransactionRepository transactionRepository;
     private final StatusRepository statusRepository;
+    private final UserRepository userRepository;
+    private final CurrencyRepository currencyRepository;
 
-    public StatusEntity transaction(String numBBFrom, String numBBTo, BigDecimal amount){
+    @Transactional
+    public StatusEntity bankBookTransaction(String numBBFrom, String numBBTo, BigDecimal amount){
 
         LocalDateTime localDateTimeInitiation = LocalDateTime.now();
 
@@ -59,6 +57,32 @@ public class TransactionService {
         transactionEntity.setCompletionDate(LocalDateTime.now());
         transactionRepository.save(transactionEntity);
         return statusEntity;
+    }
+
+
+    @Transactional
+    public StatusEntity userTransaction(Integer userIdFrom, Integer userIdTo, BigDecimal amount, String currency){
+
+        UserEntity userEntityFrom = userRepository.findById(userIdFrom).orElseThrow(() ->
+                new RuntimeException("NOT FOUND SENDER USER BY NUMBER: " + userIdFrom));
+        UserEntity userEntityTo = userRepository.findById(userIdTo).orElseThrow(() ->
+                new RuntimeException("NOT FOUND RECEIVER USER BY NUMBER: " + userIdTo));
+
+        CurrencyEntity currencyEntity = currencyRepository.findByName(currency);
+
+        BankBookEntity bankBookEntityFrom = userEntityFrom.getBankBookEntities()
+                .stream()
+                .filter((s) -> s.getCurrency().equals(currencyEntity))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("NOT FOUND BANK BOOK SENDER"));
+
+        BankBookEntity bankBookEntityTo = userEntityTo.getBankBookEntities()
+                .stream()
+                .filter((s) -> s.getCurrency().equals(currencyEntity))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("NOT FOUND BANK BOOK RECEIVER"));
+
+        return bankBookTransaction(bankBookEntityFrom.getNumber(), bankBookEntityTo.getNumber(), amount);
     }
 
 }
