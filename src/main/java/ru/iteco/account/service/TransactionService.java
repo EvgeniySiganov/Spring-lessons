@@ -27,9 +27,9 @@ public class TransactionService {
 
         LocalDateTime localDateTimeInitiation = LocalDateTime.now();
 
-        BankBookEntity bankBookEntityFrom = bankBookRepository.findByNumber(numBBFrom).orElseThrow(() ->
+        BankBookEntity bankBookEntityFrom = bankBookRepository.lockByNumber(numBBFrom).orElseThrow(() ->
                 new RuntimeException("NOT FOUND SENDER BANK BOOK BY NUMBER: " + numBBFrom));
-        BankBookEntity bankBookEntityTo = bankBookRepository.findByNumber(numBBTo).orElseThrow(() ->
+        BankBookEntity bankBookEntityTo = bankBookRepository.lockByNumber(numBBTo).orElseThrow(() ->
                 new RuntimeException("NOT FOUND RECEIVER BANK BOOK BY NUMBER: " + numBBTo));
 
         TransactionEntity transactionEntity = new TransactionEntity();

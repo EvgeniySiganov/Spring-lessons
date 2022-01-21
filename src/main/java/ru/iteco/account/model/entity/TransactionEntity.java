@@ -25,19 +25,19 @@ public class TransactionEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "sourceBankBookId", nullable = false)
+    @Column(name = "source_bank_book_id", nullable = false)
     private Integer sourceBankBookId;
 
-    @Column(name = "targetBankBookId", nullable = false)
+    @Column(name = "target_bank_book_id", nullable = false)
     private Integer targetBankBookId;
 
-    @Column(name = "amoubt", nullable = false)
+    @Column(name = "amount", nullable = false)
     private BigDecimal amount;
 
-    @Column(name = "initiationDate", nullable = false)
+    @Column(name = "initiation_date", nullable = false)
     private LocalDateTime initiationDate;
 
-    @Column(name = "completionDate", nullable = false)
+    @Column(name = "completion_date", nullable = false)
     private LocalDateTime completionDate;
 
     @OneToOne(cascade = CascadeType.ALL)

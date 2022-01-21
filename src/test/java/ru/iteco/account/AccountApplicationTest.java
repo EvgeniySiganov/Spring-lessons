@@ -12,8 +12,10 @@ import ru.iteco.account.model.entity.UserEntity;
 import ru.iteco.account.repository.GroupRepository;
 import ru.iteco.account.repository.UserRepository;
 import ru.iteco.account.service.AddressService;
+import ru.iteco.account.service.TransactionService;
 
 import javax.transaction.Transactional;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,6 +26,9 @@ public class AccountApplicationTest {
 
     @Autowired
     private AddressService addressService;
+
+    @Autowired
+    private TransactionService transactionService;
 
     @Autowired
     private UserRepository userRepository;
@@ -63,6 +68,11 @@ public class AccountApplicationTest {
     void testLoadUsersByGroups(){
         GroupEntity groupEntity = groupRepository.findById(1).get();
         log.info("GROUP ID: {} with USERS: {}", groupEntity.getId(), groupEntity.getUserEntities());
+    }
+
+    @Test
+    void testTransactional(){
+        transactionService.bankBookTransaction("num-2", "num-1", new BigDecimal(55));
     }
 
 

@@ -28,19 +28,19 @@
             <column name="id" type="integer">
                 <constraints primaryKey="true" nullable="false" unique="true"/>
             </column>
-            <column name="sourceBankBookId" type="integer">
-                <constraints foreignKeyName="bank_bank_book_source_fkey" references="bank.bank_book(id)"/>
+            <column name="source_bank_book_id" type="integer">
+                <constraints nullable="false" foreignKeyName="bank_bank_book_source_fkey" references="bank.bank_book(id)"/>
             </column>
-            <column name="targetBankBookId" type="integer">
-                <constraints foreignKeyName="bank_bank_book_target_fkey" references="bank.bank_book(id)"/>
+            <column name="target_bank_book_id" type="integer">
+                <constraints nullable="false" foreignKeyName="bank_bank_book_target_fkey" references="bank.bank_book(id)"/>
             </column>
             <column name="amount" type="numeric">
                 <constraints nullable="false"/>
             </column>
-            <column name="initiationDate" type="datetime">
+            <column name="initiation_date" type="timestamp">
                 <constraints nullable="false"/>
             </column>
-            <column name="completionDate" type="datetime">
+            <column name="completion_date" type="timestamp">
                 <constraints nullable="false"/>
             </column>
             <column name="status" type="integer">
