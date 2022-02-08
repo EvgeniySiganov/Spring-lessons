@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/account
+    username: account
+    password: account
+  jpa:
+    show-sql: true
+  liquibase:
+    enabled: false
+
+service:
+  currency:
+    all-exchange: http://localhost:8090/all-exchange
+    convert: http://localhost:8090/convert
+  stock:
+    actual: http://localhost:8070/actual
