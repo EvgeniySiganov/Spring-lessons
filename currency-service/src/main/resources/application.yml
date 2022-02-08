@@ -1,0 +1,7 @@
+currency:
+    token: 42e6c99942d1119371116c91fc32ac57
+    url:
+      convert: http://data.fixer.io/api/convert?access_key=%s&from=%s&to=%s&amount=%s
+      all-exchange: http://data.fixer.io/api/latest?access_key=%s
+server:
+  port: 8090
