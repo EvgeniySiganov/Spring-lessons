@@ -10,13 +10,10 @@ spring:
   liquibase:
     change-log: classpath:db/changelog/db.changelog-master.xml
 
-logging:
-  level:
-    org.springframework.: error
-  file:
-    path: log
-  pattern:
-    file: '%d{yyyy-MM-dd HH:mm:ss} - %msg%n'
+security:
+  jwt:
+    expiration: 600
+    secret: c2VjcmV0
 
 service:
   currency:

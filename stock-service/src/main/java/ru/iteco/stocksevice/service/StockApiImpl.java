@@ -22,9 +22,9 @@ public class StockApiImpl implements StockApi {
     private final String urlHistoricalQuotes;
 
     public StockApiImpl(@Qualifier("restTemplateStock") RestTemplate restTemplate,
-                        @Value("stock.token") String token,
-                        @Value("stock.url.actual") String urlActualQuotes,
-                        @Value("stock.url.historical-quote") String urlHistoricalQuotes) {
+                        @Value("${stock.token}") String token,
+                        @Value("${stock.url.actual}") String urlActualQuotes,
+                        @Value("${stock.url.historical-quote}") String urlHistoricalQuotes) {
         this.restTemplate = restTemplate;
         this.token = token;
         this.urlActualQuotes = urlActualQuotes;

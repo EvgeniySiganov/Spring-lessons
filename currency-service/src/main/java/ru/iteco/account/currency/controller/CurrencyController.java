@@ -8,6 +8,8 @@ import ru.iteco.account.currency.model.ConvertResult;
 import ru.iteco.account.currency.model.ConverterRequest;
 import ru.iteco.account.currency.service.ExchangeApi;
 
+import java.util.Map;
+
 @RestController
 @RequiredArgsConstructor
 @Slf4j
@@ -16,15 +18,15 @@ public class CurrencyController {
     private final ExchangeApi exchangeApi;
 
     @PostMapping("/convert")
-    public ConvertResult convertAmount(@RequestHeader("trace-id") String traceId,
-                                       @RequestBody ConverterRequest converterRequest){
-        log.info("REQUEST WITH TRACE ID: {}", traceId);
+    public ConvertResult convertAmount(@RequestBody ConverterRequest converterRequest,
+                                       @RequestHeader Map<String, String> headers){
+        log.info("REQUEST WITH headers: {}", headers);
         return exchangeApi.convert(converterRequest);
     }
 
     @GetMapping("/all-exchange")
-    public AllCurrencyExchange getAllExchange(@RequestHeader("trace-id") String traceId){
-        log.info("REQUEST WITH TRACE ID: {}", traceId);
+    public AllCurrencyExchange getAllExchange(@RequestHeader Map<String, String> headers){
+        log.info("REQUEST WITH headers: {}", headers);
         return exchangeApi.getAllCurrencyExchange();
     }
 }

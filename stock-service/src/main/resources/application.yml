@@ -5,3 +5,11 @@ stock:
       historical-quote: https://api.stockdata.org/v1/data/eod/multiple?symbols=%s&api_token=%s
 server:
   port: 8070
+auth:
+  audience: stock-service
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: https://dev-p8m-k2lu.us.auth0.com/

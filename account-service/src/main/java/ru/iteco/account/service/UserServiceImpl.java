@@ -88,6 +88,7 @@ public class UserServiceImpl implements UserService {
     }
 
     private AddressDto mapToDto(AddressEntity addressEntity){
+        if(addressEntity == null) return null;
         return AddressDto.builder()
                 .country(addressEntity.getCountry())
                 .city(addressEntity.getCity())
