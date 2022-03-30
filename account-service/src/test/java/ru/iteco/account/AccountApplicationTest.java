@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import ru.iteco.account.model.currency.ConverterRequest;
 import ru.iteco.account.model.dto.AddressDto;
 import ru.iteco.account.model.entity.BankBookEntity;
@@ -48,6 +49,9 @@ public class AccountApplicationTest {
 
     @Autowired
     private StockServiceApi stockServiceApi;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Test
     void testLoadUserFromAddress(){
@@ -126,6 +130,9 @@ public class AccountApplicationTest {
         log.info("RESULT: {}", stockServiceApi.getActualRates(rates));
     }
 
-
+    @Test
+    void generatePassword(){
+        log.info("PASS: {}", passwordEncoder.encode("iteco"));
+    }
 
 }

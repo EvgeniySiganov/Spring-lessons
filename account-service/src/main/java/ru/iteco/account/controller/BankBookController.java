@@ -19,7 +19,7 @@ import java.util.Map;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/bank-book")
+@RequestMapping("/rest/bank-book")
 @Validated
 public class BankBookController {
 

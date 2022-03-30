@@ -1,0 +1,30 @@
+server:
+  port: 8888
+service:
+  currency:
+    uri: http://localhost:8090
+    path:
+      all-exchange: /all-exchange
+      convert: /convert
+    audience: currency-service
+  stock:
+    uri: http://localhost:8070
+    path:
+      get-stock-quotes: /get-stock-quotes
+      get-historical-quotes: /get-historical-quotes
+    audience: stock-service
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          auth0:
+            client-id: 8ZKLxzuw5OcOUaKHl4n8EfLIveSKlISK
+            client-secret: N6NiXYtQvgwgBk-3LK_x1xogeMBGmoTMVOy1rFwUvMfwDPjifhlqv3qMRb62ijlM
+            scope:
+              - openid
+              - profile
+              - email
+        provider:
+          auth0:
+            issuer-uri: https://dev-p8m-k2lu.us.auth0.com/

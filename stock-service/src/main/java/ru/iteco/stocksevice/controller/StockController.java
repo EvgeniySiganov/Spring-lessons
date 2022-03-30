@@ -2,6 +2,7 @@ package ru.iteco.stocksevice.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import ru.iteco.stocksevice.model.HistoricalQuotesRequest;
 import ru.iteco.stocksevice.model.HistoricalQuotesResponse;
@@ -18,7 +19,7 @@ public class StockController {
 
     private final StockApi stockApi;
 
-    @PostMapping("/actual")
+    @PostMapping("/get-stock-quotes")
     public StockQuotesResDto getRealTimeStockQuotes(@RequestBody List<String> symbols) throws URISyntaxException {
         return stockApi.getActualRates(symbols);
     }

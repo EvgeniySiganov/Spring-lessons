@@ -5,3 +5,12 @@ currency:
       all-exchange: http://data.fixer.io/api/latest?access_key=%s
 server:
   port: 8090
+
+auth:
+  audience: currency-service
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: https://dev-p8m-k2lu.us.auth0.com/
